@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import TextField from '../compoent/TextField';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authAction } from '../store/auth';
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,6 +22,7 @@ const SignUp = () => {
   };
   const onSubmit = (e: any) => {
     e.preventDefault();
+    dispatch(authAction.logIn(email));
     navigate('/');
   };
   return (

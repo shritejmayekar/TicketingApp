@@ -1,7 +1,14 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { FaTicket } from 'react-icons/fa6';
+import { RiHomeLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { authAction } from '../store/auth';
+import { FaCircleUser } from 'react-icons/fa6';
+import { GoIssueTracks } from 'react-icons/go';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
+import { AiOutlineLogin } from 'react-icons/ai';
+import { FaWpforms } from 'react-icons/fa6';
+
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,13 +22,13 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="navbar bg-dark border-bottom border-body"
+        className="navbar bg-dark sticky-top border-bottom border-body"
         data-bs-theme="dark"
       >
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             <FaTicket />
-            <span className="mx-1">Ticketing App</span>
+            <span className="mx-1">Support Desk (Ticketing)</span>
           </a>
           <button
             className="navbar-toggler"
@@ -44,7 +51,8 @@ const Navbar = () => {
                   aria-current="page"
                   href="#"
                 >
-                  Home
+                  <RiHomeLine />
+                  <span className="mx-2 my-10">Home</span>
                 </a>
               </li>
               <li className="nav-item" onClick={() => navigateTo('/profile')}>
@@ -57,7 +65,7 @@ const Navbar = () => {
                   aria-current="page"
                   href="#"
                 >
-                  Profile
+                  <FaCircleUser /> Profile
                 </a>
               </li>
               {!user && (
@@ -75,7 +83,8 @@ const Navbar = () => {
                       aria-current="page"
                       href="#"
                     >
-                      SignIn
+                      <AiOutlineLogin />
+                      <span className="mx-2">SignIn</span>
                     </a>
                   </li>
                   <li
@@ -91,7 +100,8 @@ const Navbar = () => {
                       aria-current="page"
                       href="#"
                     >
-                      SignUp
+                      <FaWpforms />
+                      <span className="mx-2">SignUp</span>
                     </a>
                   </li>
                 </>
@@ -106,7 +116,8 @@ const Navbar = () => {
                   aria-current="page"
                   href="#"
                 >
-                  Ticket
+                  <GoIssueTracks />
+                  <span className="mx-2">Ticket</span>
                 </a>
               </li>
               {user && (
@@ -115,7 +126,8 @@ const Navbar = () => {
                   onClick={() => dispatch(authAction.logOut())}
                 >
                   <a className="nav-link" aria-current="page" href="#">
-                    Logout
+                    <RiLogoutCircleRLine />
+                    <span className="mx-2">Logout</span>
                   </a>
                 </li>
               )}
