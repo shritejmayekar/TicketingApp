@@ -1,10 +1,10 @@
 const TextField = ({ name, id, placeholder, type, value, onChange }: any) => {
   return (
     <div className="row mb-3">
-      <label htmlFor="colFormLabel" className="col-sm-2 col-form-label">
+      <label htmlFor="colFormLabel" className="col-md-5 col-form-label">
         {name}
       </label>
-      <div className="col-sm-10">
+      <div className="col-md-5">
         <input
           type={type}
           value={value}

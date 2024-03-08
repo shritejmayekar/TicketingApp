@@ -1,18 +1,27 @@
 import { IoArrowBackCircleSharp } from 'react-icons/io5';
 import TextField from '../compoent/TextField';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import { ticketAction } from '../store/ticket';
+import { ToastContainer, Zoom, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NewTicket = () => {
   const auth = useSelector((state: any) => state.auth.user);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const dispatch = useDispatch();
+  const initialFormData = {
+    id: uuidv4(),
     email: auth,
     name: '',
     product: '',
     description: '',
-  });
+    status: 'new',
+    date: new Date(),
+  };
+  const [formData, setFormData] = useState(initialFormData);
   const { name, email, product, description } = formData;
   const onChange = (e: any) => {
     setFormData((prevState) => ({
@@ -20,8 +29,27 @@ const NewTicket = () => {
       [e.target.id]: e.target.value,
     }));
   };
-  const onSubmit = (e: any) => {
+  const handleChange = (e: any) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+  const onSubmit = async (e: any) => {
     e.preventDefault();
+    dispatch(ticketAction.create(formData));
+    setFormData(initialFormData);
+    toast.success('Successfully created ticket', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+      transition: Zoom,
+    });
   };
   return (
     <div className="d-flex flex-column gap-3 py-2 px-2">
@@ -40,7 +68,7 @@ const NewTicket = () => {
       </div>
       <form
         onSubmit={onSubmit}
-        className="column px-5 w-90  align-self-center mb-3"
+        className="d-flex flex-column px-5  align-self-center mb-3"
       >
         <TextField
           name="Customer Name:"
@@ -58,14 +86,24 @@ const NewTicket = () => {
           placeholder="Enter Customer Email"
           onChange={onChange}
         />
-        <TextField
-          name="Product:"
-          type="text"
+        <label htmlFor="exampleDataList" className="form-label">
+          Product:
+        </label>
+        <select
+          className="form-select mb-3"
           id="product"
+          aria-label="Default select example"
+          required
+          name="Product:"
           value={product}
-          placeholder="Enter Product"
-          onChange={onChange}
-        />
+          onChange={handleChange}
+        >
+          <option value="">--- select product ---</option>
+          <option value="Iphone">Iphone</option>
+          <option value="Macbook Air">Macbook Air</option>
+          <option value="Macbook Pro">Macbook Pro</option>
+          <option value="Airdopes Pro">Airdopes Pro</option>
+        </select>
         <TextField
           name="Description of the issue:"
           type="textarea"
@@ -80,6 +118,7 @@ const NewTicket = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

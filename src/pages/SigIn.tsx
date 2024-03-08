@@ -43,7 +43,7 @@ const SignIn = () => {
           onChange={onChange}
         />
         <div className="d-grid gap-2">
-          <button type="submit" className="btn btn-primary w-90">
+          <button type="submit" className="btn btn-secondary border border-dark w-90">
             Login
           </button>
         </div>

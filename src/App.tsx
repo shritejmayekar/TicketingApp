@@ -13,6 +13,7 @@ import Ticket from './pages/Ticket';
 import PrivateRoutes from './PrivateRoutes';
 import AuthRoutes from './AuthRoutes';
 import NewTicket from './pages/NewTicket';
+import DetailTicket from './pages/DetailTicket';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Navbar />}>
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<Profile />} />
         <Route path="/new-ticket" element={<NewTicket />} />
         <Route path="/ticket" element={<Ticket />} />
+        <Route path="/ticket/:id" element={<DetailTicket />} />
       </Route>
       <Route element={<AuthRoutes />}>
         <Route path="/sign-in" element={<SignIn />} />

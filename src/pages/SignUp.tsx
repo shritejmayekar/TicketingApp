@@ -53,7 +53,10 @@ const SignUp = () => {
           onChange={onChange}
         />
         <div className="d-grid gap-2">
-          <button type="submit" className="btn btn-primary w-90">
+          <button
+            type="submit"
+            className="btn btn-secondary border border-black w-90"
+          >
             Register
           </button>
         </div>

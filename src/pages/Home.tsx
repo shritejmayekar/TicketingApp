@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
   const user = useSelector((state: any) => state.auth.user);
   const navigate = useNavigate();
-
   return (
     <div className="d-flex flex-column mb-3 align-items-center">
       <div className="p-2">
