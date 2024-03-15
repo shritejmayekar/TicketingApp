@@ -6,11 +6,12 @@ const Ticket = () => {
   const navigate = useNavigate();
   const user = useSelector((state: any) => state.auth.user);
 
-  const tickets = useSelector((state: any) =>
-    state.ticket.tickets.filter(
+  let tickets = useSelector((state: any) => state.ticket.tickets);
+  if (tickets.length > 0) {
+    tickets = tickets.filter(
       (ticket: { email: string }) => ticket.email === user
-    )
-  );
+    );
+  }
   return (
     <div className="d-flex flex-column gap-3 py-2 px-2">
       <button

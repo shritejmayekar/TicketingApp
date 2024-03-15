@@ -1,22 +1,18 @@
-interface TextFieldProps {
+interface TextAreaFieldProps {
   id: string;
   name: string;
   placeholder: string;
-  type: string;
   value: string;
   onChange: (e: any) => void;
   className: string | '';
-  disabled: boolean;
 }
-const TextField: React.FC<TextFieldProps> = ({
+const TextArea: React.FC<TextAreaFieldProps> = ({
   id,
   name,
   placeholder,
-  type,
   value,
   onChange,
   className = '',
-  disabled = false,
 }: any) => {
   return (
     <div className={`row mb-3 ${className}`}>
@@ -24,19 +20,17 @@ const TextField: React.FC<TextFieldProps> = ({
         {name}
       </label>
       <div className="col-md-5">
-        <input
-          type={type}
+        <textarea
           value={value}
           id={id}
           onChange={onChange}
           className="form-control"
           placeholder={placeholder}
           required
-          disabled={disabled}
         />
       </div>
     </div>
   );
 };
 
-export default TextField;
+export default TextArea;
